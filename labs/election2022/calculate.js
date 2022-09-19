@@ -34,3 +34,16 @@ function calculateMandates(parties) {
 /* Skriv in i funktionen vilket parti du vill få resultat att se mandat från.
     Om du skriver in fler partier så får du flera mandat. */
 calculateMandates(["S", "V", "KD"]);
+
+/**
+ * Lösningar av Oscar Nilsson.
+ *
+ * function calculateMandates(parties) {
+ * const result = valData.partiMandat.filter(p => parties.includes(p.partiforkortning));
+ * }
+ *
+ * let mandateCount = 0;
+ * result.forEach(p => mandateCount += p.antalMandat)
+ * return `${parties.join(", ")}: ${mandateCount} av 349 totalt`;
+ * console.log(calculateMandates(["C", "L", "KD"]));
+ */

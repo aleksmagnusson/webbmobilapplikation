@@ -24,4 +24,4 @@ function triangel() {
 
 triangel();
 
-// Fick hjälp med funktionen med Marcus, Oscar och
+// Fick hjälp med funktionen med Marcus och Oscar.

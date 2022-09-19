@@ -52,4 +52,10 @@ function partyResults(party) {
   return;
 }
 
+/**
+ *  function districtResults(districtName) {
+ * const foundDistrict = valData.valkretsar.find
+ * (vk) =>}
+ */
+
 districtResults("S");
