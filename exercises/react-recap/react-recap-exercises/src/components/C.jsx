@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function C({ setNum }) {
+function C({ num, setNum }) {
     const [num, setNum] = useState(0);
 
     return (

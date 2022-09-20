@@ -12,5 +12,5 @@ function A({ num, setNum }) {
     )
 }
 
-export default A
+export default A;
 

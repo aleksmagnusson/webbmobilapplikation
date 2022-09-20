@@ -1,13 +1,14 @@
-import React, { useState } from 'react'
+import React from 'react'
 import C from "./C";
 
-function B({ setNum }) {
-    const [num, setNum] = useState(0);
+function B({ num, setNum }) {
 
     return (
-        <C setNum={setNum}>
+        <div>
+            <C num={num} setNum={setNum}>
 
-        </C>
+            </C>
+        </div>
     )
 }
 

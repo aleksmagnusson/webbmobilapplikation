@@ -7,7 +7,7 @@ import SimplePropComponent from './components/SimplePropComponent'
 import A from './components/A'
 
 function App() {
-  const [num, setNum] = useState(0)
+  //  const [num, setNum] = useState(0)
 
   return (
     <div className="App">
