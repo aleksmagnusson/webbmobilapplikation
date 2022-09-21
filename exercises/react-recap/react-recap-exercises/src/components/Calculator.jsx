@@ -11,29 +11,32 @@ import { useState } from "react";
  * Men du får bara använda 3st states totalt. Varje 'state' får bara innehålla i ett värde.
  */
 
+// Given parts of states to calculator
 function Calculator() {
-    const [countLeft, setCountLeft] = useState(0);
+    const [left, setLeft] = useState(0);
+    const [right, setRight] = useState(0);
+    const [math, setMath] = useState("+");
 
-    const [countRight, setCountRight] = useState(0);
-
-    const [operates, setOperates] = useState(0);
-
+    // Math functions
+    function calculate() {
+        if (math === "+") return left + right;
+        if (math === "-") return left - right;
+        if (math === "*") return left * right;
+        if (math === "/") return left / right;
+    }
 
     return (
         <div>
             <p className='paragraf'>#2 <br /> Öka numret när du trycker på knapparna och visa resultatet i knappen.</p>
-            <button className="likeButton" onClick={() => setCountLeft((countLeft) => countLeft + 1)}>
-                {countLeft}
-            </button>
-            <select className='operator'>
-                <option value="addition">+</option>
-                <option value="subtraction">-</option>
-                <option value="multiplies">*</option>
-                <option value="divided">/</option>
+            <button className="likeButton" onClick={() => setLeft((left) => left + 1)}>{left}</button>
+            <select className='operator' value={math} onChange={(event) => setMath(event.target.value)}>
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
             </select>
-            <button className="likeButton" onClick={() => setCountRight((countRight) => countRight + 1)}>
-                {countRight}
-            </button>
+            <button className="likeButton" onClick={() => setRight(right + 1)}>{right}</button>
+            <p>= {calculate()}</p>
         </div>
     )
 }

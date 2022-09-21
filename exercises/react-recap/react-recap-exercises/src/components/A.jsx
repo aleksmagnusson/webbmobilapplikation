@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import B from "./B";
 
-function A({ num, setNum }) {
-    const [num, setNum] = useState(0);
+function A() {
+    const [x, setX] = useState(0);
+
+    function addOne() {
+        setX(x + 1);
+    }
 
     return (
-        <div>
-            <B num={num} setNum={setNum}></B>
+        <div style={{ border: "1px solid red" }}>
+            <p>A</p>
+            <B value={x} onClick={addOne} />
         </div>
 
     )
@@ -14,3 +19,7 @@ function A({ num, setNum }) {
 
 export default A;
 
+/**
+ * 
+ * 
+ */

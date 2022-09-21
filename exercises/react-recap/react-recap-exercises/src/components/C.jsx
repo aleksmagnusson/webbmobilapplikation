@@ -1,12 +1,13 @@
 import React, { useState } from 'react'
 
-function C({ num, setNum }) {
-    const [num, setNum] = useState(0);
+function C(props) {
 
     return (
-        <button className="likeButton" onClick={() => setNum((num) => num + 1)}>
-            {num} A,B,C.
-        </button>
+        <div style={{ border: "1px solid green" }}>
+            <p>C</p>
+            <p>x är = {props.value}</p>
+            <button className='likeButton' onClick={props.onClick}>x++</button>
+        </div>
     )
 }
 

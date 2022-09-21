@@ -1,15 +1,15 @@
 import React from 'react'
 import C from "./C";
 
-function B({ num, setNum }) {
+function B(props) {
 
     return (
-        <div>
-            <C num={num} setNum={setNum}>
+        <div style={{ border: "1px solid yellow" }}>
+            <p>B</p>
+            <C {...props} />
 
-            </C>
         </div>
     )
 }
 
-export default B
+export default B;

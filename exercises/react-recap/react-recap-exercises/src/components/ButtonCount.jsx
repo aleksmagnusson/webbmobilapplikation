@@ -12,6 +12,7 @@ import './ButtonCount.css'
 
 function ButtonCount() {
     const [count, setCount] = useState(0);
+    // previousState 
 
     return (
         <div>
