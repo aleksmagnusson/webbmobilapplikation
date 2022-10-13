@@ -8,12 +8,12 @@ const LRU = require("lru-cache");
 
 const tokenCache = new LRU({
   max: 100,
-  maxAge: 1000 * 60 * 2
+  maxAge: 1000 * 60 * 2,
 });
 
 function generateRandomToken() {
   return new Promise((resolve, reject) => {
-    crypto.randomBytes(24, function(err, buffer) {
+    crypto.randomBytes(24, function (err, buffer) {
       if (err) {
         return reject(err);
       }
@@ -28,41 +28,31 @@ let users = [
     name: "Bob",
     email: "bob@example.com",
     password: "bob123",
-    age: 30
+    age: 30,
   },
   {
     name: "Alice",
     email: "alice@example.com",
     password: "alice123",
-    age: 20
+    age: 20,
   },
   {
     name: "Eve",
     email: "eve@example.com",
     password: "eve123",
-    age: 40
-  }
+    age: 40,
+  },
 ];
 
 const authSchema = Joi.object().keys({
-  email: Joi.string()
-    .email({ minDomainAtoms: 2 })
-    .required(),
-  password: Joi.string().required()
+  email: Joi.string().email({ minDomainAtoms: 2 }).required(),
+  password: Joi.string().required(),
 });
 
 const profileSchema = Joi.object().keys({
-  name: Joi.string()
-    .min(1)
-    .max(40)
-    .required(),
-  email: Joi.string()
-    .email({ minDomainAtoms: 2 })
-    .required(),
-  age: Joi.number()
-    .integer()
-    .min(0)
-    .required()
+  name: Joi.string().min(1).max(40).required(),
+  email: Joi.string().email({ minDomainAtoms: 2 }).required(),
+  age: Joi.number().integer().min(0).required(),
 });
 
 const app = express();
@@ -78,10 +68,7 @@ app.use((req, res, next) => {
     return next();
   }
 
-  const parts = authHeader
-    .trim()
-    .toLowerCase()
-    .split(" ");
+  const parts = authHeader.trim().toLowerCase().split(" ");
 
   if (parts.length === 2 && parts[0] === "bearer") {
     req.token = parts[1] || null;
@@ -100,20 +87,20 @@ app.post("/auth", async (req, res) => {
   if (result.error) {
     return res.status(400).json({
       status: "error",
-      message: "invalid parameters"
+      message: "invalid parameters",
     });
   }
 
   const { email, password } = req.body;
 
-  const user = users.find(user => user.email === email);
+  const user = users.find((user) => user.email === email);
 
   const loginSuccess = user && user.password === password;
 
   if (!loginSuccess) {
     return res.status(401).json({
       status: "error",
-      message: "email or password is incorrect"
+      message: "email or password is incorrect",
     });
   }
 
@@ -125,12 +112,12 @@ app.post("/auth", async (req, res) => {
     res.json({
       status: "success",
       message: "login successful",
-      token
+      token,
     });
   } catch (err) {
     res.status(500).json({
       status: "error",
-      message: "unable to generate token"
+      message: "unable to generate token",
     });
   }
 });
@@ -139,25 +126,25 @@ app.get("/me", (req, res) => {
   if (!req.token) {
     return res.status(401).json({
       status: "error",
-      message: "token missing"
+      message: "token missing",
     });
   }
 
   if (!tokenCache.has(req.token)) {
     return res.status(401).json({
       status: "error",
-      message: "token expired"
+      message: "token expired",
     });
   }
 
   const email = tokenCache.get(req.token);
 
-  const user = users.find(x => x.email === email);
+  const user = users.find((x) => x.email === email);
 
   if (!user) {
     return res.status(401).json({
       status: "error",
-      message: "token invalid"
+      message: "token invalid",
     });
   }
 
@@ -165,7 +152,7 @@ app.get("/me", (req, res) => {
 
   res.json({
     status: "success",
-    profile: userWithoutPassword
+    profile: userWithoutPassword,
   });
 });
 
@@ -173,25 +160,25 @@ app.put("/me", (req, res) => {
   if (!req.token) {
     return res.status(401).json({
       status: "error",
-      message: "token missing"
+      message: "token missing",
     });
   }
 
   if (!tokenCache.has(req.token)) {
     return res.status(401).json({
       status: "error",
-      message: "token expired"
+      message: "token expired",
     });
   }
 
   const email = tokenCache.get(req.token);
 
-  const user = users.find(x => x.email === email);
+  const user = users.find((x) => x.email === email);
 
   if (!user) {
     return res.status(401).json({
       status: "error",
-      message: "token invalid"
+      message: "token invalid",
     });
   }
 
@@ -200,20 +187,20 @@ app.put("/me", (req, res) => {
   if (result.error) {
     return res.status(400).json({
       status: "error",
-      message: "invalid parameters"
+      message: "invalid parameters",
     });
   }
 
   if (req.body.email !== user.email) {
     return res.status(400).json({
       status: "error",
-      message: "email cannot be changed"
+      message: "email cannot be changed",
     });
   }
 
   const newUser = {
     ...user,
-    ...req.body
+    ...req.body,
   };
 
   const index = users.indexOf(user);
