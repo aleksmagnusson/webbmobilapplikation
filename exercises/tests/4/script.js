@@ -14,7 +14,7 @@ const reverseString = (str) => {
   }
 
   return characters.join("");
-}
+};
 
 const isBetween = (a, b, x) => {
   if (!Number.isInteger(a)) {
@@ -42,7 +42,7 @@ const isBetween = (a, b, x) => {
   }
 
   return true;
-}
+};
 
 const chunk = (ar, itemsPerChunk) => {
   if (!Array.isArray(ar)) {
@@ -73,7 +73,7 @@ const chunk = (ar, itemsPerChunk) => {
   }
 
   return rv;
-}
+};
 
 module.exports = {
   reverseString: reverseString,
